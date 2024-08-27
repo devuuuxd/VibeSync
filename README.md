@@ -13,22 +13,29 @@ npm install VibeSync
 ## Importing and Setup
 First, you need to import the VCStatus class and initialize it with your Discord bot client.
 ```js
-const { Client } = require('discord.js');
-const { VCStatus } = require('VibeSync');
+const { Client, GatewayIntentBits } = require('discord.js');
+const { VibeSync } = require('VibeSync');
 
-const client = new Client();
-const vcStatus = new VCStatus(client);
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
+    ]
+});
+const vcStatus = new VibeSync(client);
 
 ```
 ## Updating Voice Channel Status
 Use the `updateVoiceChannel` method to set a custom status for a specific voice channel.
 ```js
-const channelId = 'your-voice-channel-id';
-const status = 'New Status';
+    const channelId = 'CHANNEL_ID_HERE';  
+    const status = 'CUSTOM_STATUS_HERE';
 
-vcStatus.updateVoiceChannel(channelId, status)
-    .then(() => console.log('Status updated successfully'))
-    .catch(err => console.error('Error updating status:', err));
+    vcStatus.setVoiceStatus(channelId, status)
+        .then(() => console.log('Voice channel status updated successfully'))
+        .catch(err => console.error('Failed to update voice channel status:', err));
 
 ```
 
@@ -85,6 +92,5 @@ client.login('TOKEN_HERE');
 # License
 ## `VibeSync` is licensed under the MIT License. See the LICENSE file for more information.
 ### Feel free to adjust the examples and instructions according to your specific requirements. Let me know if you need any changes or additional details!
-
 
 
