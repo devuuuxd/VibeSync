@@ -35,23 +35,40 @@ vcStatus.updateVoiceChannel(channelId, status)
 # Example
 ## Here’s a complete example demonstrating how to use `VibeSync`:
 ```js
-const { Client } = require('discord.js');
-const { VCStatus } = require('VibeSync');
+const { Client, GatewayIntentBits } = require('discord.js');
+const { VibeSync } = require('VibeSync');
 
-const client = new Client();
-const vcStatus = new VCStatus(client);
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
+    ]
+});
+
+const vcStatus = new VibeSync(client);
 
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    const channelId = 'your-voice-channel-id';
-    const status = 'Custom Status';
 
-    vcStatus.updateVoiceChannel(channelId, status)
+    const channelId = 'CHANNEL_ID_HERE';  
+    const status = 'CUSTOM_STATUS_HERE';
+
+    const channel = client.channels.cache.get(channelId);
+
+    if (!channel) {
+        console.error('Voice channel not found');
+        return;
+    }
+
+    vcStatus.setVoiceStatus(channelId, status)
         .then(() => console.log('Voice channel status updated successfully'))
         .catch(err => console.error('Failed to update voice channel status:', err));
 });
 
-client.login('your-bot-token');
+
+client.login('TOKEN_HERE');
 ```
 
 # Error Handling
