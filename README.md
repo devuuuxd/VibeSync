@@ -14,7 +14,7 @@ npm install VibeSync
 First, you need to import the VCStatus class and initialize it with your Discord bot client.
 ```js
 const { Client, GatewayIntentBits } = require('discord.js');
-const { VibeSync } = require('VibeSync');
+const { VibeSync } = require("vibesync");
 
 const client = new Client({
     intents: [
