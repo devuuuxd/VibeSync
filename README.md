@@ -43,7 +43,7 @@ Use the `updateVoiceChannel` method to set a custom status for a specific voice 
 ## Here’s a complete example demonstrating how to use `VibeSync`:
 ```js
 const { Client, GatewayIntentBits } = require('discord.js');
-const { VibeSync } = require('VibeSync');
+const { VibeSync } = require('vibesync');
 
 const client = new Client({
     intents: [
