@@ -7,7 +7,7 @@
 To install `VibeSync`, run:
 
 ```bash
-npm install VibeSync
+npm install vibesync
 ```
 # Usage
 ## Importing and Setup
